@@ -1,7 +1,7 @@
 SystemVolume
-=======
+============
 
-A simple interface for controlling the Mac OS X System Volume
+A simple interface for controlling the Mac OS X System Volume via Keymando.
 
 
 Basic Usage
