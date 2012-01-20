@@ -1,49 +1,50 @@
 class SystemVolume < Plugin
 
   requires_version '1.0.3'
-	
-	class << self
+  
+  class << self
 
-		def initialize
-			@previous_volume = 0
-			@is_muted = !(current > 0)
-		end
-		
-		def increase(increment=10)	
-			@previous_volume = current
-			@is_muted = !(@previous_volume + increment > 0)
-			osaexec "set volume output volume (output volume of (get volume settings) + #{increment})"
-		end
-
-		def decrease(decrement=10)
-			increase(-decrement)
-		end
-
-		def set(level)
-			@is_muted = !(level > 0)
-			@previous_volume = current
+    def initialize
+      @is_muted = !(current > 0)
+      @previous_volume = 0
+    end
+    
+    def increase(increment=10)  
+      @is_muted = !(@previous_volume + increment > 0)
+      @previous_volume = current
 			
-			osaexec "set volume output volume #{level}"
-		end
+      osaexec "set volume output volume (output volume of (get volume settings) + #{increment})"
+    end
 
-		def toggle_mute
-			muted? ? set(@previous_volume) : set(0)
-		end
+    def decrease(decrement=10)
+      increase(-decrement)
+    end
 
-		def current
-			osaexec('output volume of (get volume settings)').to_i
-		end
+    def set(level)
+      @is_muted = !(level > 0)
+      @previous_volume = current
+      
+      osaexec "set volume output volume #{level}"
+    end
 
-		def muted?
-			@is_muted
-		end
+    def toggle_mute
+      muted? ? set(@previous_volume) : set(0)
+    end
 
-		private
-		
-		def osaexec(osa_cmd)
-			%x[osascript -e '#{osa_cmd}']
-		end
+    def current
+      osaexec('output volume of (get volume settings)').to_i
+    end
 
-	end
+    def muted?
+      @is_muted
+    end
+
+    private
+    
+    def osaexec(osa_cmd)
+      %x[osascript -e '#{osa_cmd}']
+    end
+
+  end
 
 end
