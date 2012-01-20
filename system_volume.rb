@@ -1,17 +1,17 @@
 class SystemVolume < Plugin
 
   requires_version '1.0.3'
-
-	def before
-		SystemVolume.is_muted = !(SystemVolume.current_volume > 0)
-	end
 	
 	class << self
-		attr_accessor :previous_volume, :is_muted
-	
+
+		def initialize
+			@previous_volume = 0
+			@is_muted = !(current > 0)
+		end
+		
 		def increase(increment=10)	
-			self.previous_volume = current_volume
-			self.is_muted = !(self.previous_volume + increment > 0)
+			@previous_volume = current
+			@is_muted = !(@previous_volume + increment > 0)
 			osaexec "set volume output volume (output volume of (get volume settings) + #{increment})"
 		end
 
@@ -20,18 +20,22 @@ class SystemVolume < Plugin
 		end
 
 		def set(level)
-			self.is_muted = !(level > 0)
-			self.previous_volume = current_volume
+			@is_muted = !(level > 0)
+			@previous_volume = current
 			
 			osaexec "set volume output volume #{level}"
 		end
 
 		def toggle_mute
-			self.is_muted ? set(self.previous_volume) : set(0)
+			muted? ? set(@previous_volume) : set(0)
 		end
 
-		def current_volume
+		def current
 			osaexec('output volume of (get volume settings)').to_i
+		end
+
+		def muted?
+			@is_muted
 		end
 
 		private
