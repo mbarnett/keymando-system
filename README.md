@@ -1,7 +1,7 @@
-SystemVolume
+System
 ============
 
-A simple plugin for controlling the Mac OS X System Volume via Keymando.
+A simple plugin for controlling the Mac OS X System Properties (right now, volume and play/pause) via Keymando.
 
 
 Basic Usage
@@ -9,56 +9,33 @@ Basic Usage
 
 The volume is set on a scale from 0 (off) to 100 (full volume).
 
-Current Volume
---------------
-
-``` ruby
-    SystemVolume.current
-```
-
 Increase volume
 ---------------
 
 ``` ruby
-    SystemVolume.increase
+    System.increase
 ```
 Defaults to an increase of 10 units. A different increment step can be specified instead:
 
 ``` ruby
-    SystemVolume.increase 33
+    System.increase 33
 ```
 
 Decrease volume
 ---------------
 
 ``` ruby
-    SystemVolume.decrease
+    System.decrease
 ```
 Defaults to an decrease of 10 units. A different decrement step can be specified instead:
 
 ``` ruby
-    SystemVolume.decrease 33
+    System.decrease 33
 ```
 
-Set volume
-----------
+Play/Pause
+-----------
 
 ``` ruby
-    SystemVolume.set 75
+    System.toggle_pause
 ```
-
-
-Muting / Unmuting
------------------
-
-``` ruby
-    SystemVolume.toggle_mute
-```
-
-Muted?
-------
-
-``` ruby
-    SystemVolume.muted?
-```
-
