@@ -11,7 +11,7 @@ class System < Plugin
     end
 
     def volume_decrease(decrement=10)
-      increase(-decrement)
+      volume_increase(-decrement)
     end
 
     def toggle_pause
