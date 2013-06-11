@@ -13,24 +13,24 @@ Increase volume
 ---------------
 
 ``` ruby
-    System.increase
+    System.volume_increase
 ```
 Defaults to an increase of 10 units. A different increment step can be specified instead:
 
 ``` ruby
-    System.increase 33
+    System.volume_increase 33
 ```
 
 Decrease volume
 ---------------
 
 ``` ruby
-    System.decrease
+    System.volume_decrease
 ```
 Defaults to an decrease of 10 units. A different decrement step can be specified instead:
 
 ``` ruby
-    System.decrease 33
+    System.volume_decrease 33
 ```
 
 Play/Pause

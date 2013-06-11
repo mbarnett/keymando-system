@@ -6,11 +6,11 @@ class System < Plugin
 
   class << self
 
-    def increase(increment=10)
+    def volume_increase(increment=10)
       osaexec "set volume output volume (output volume of (get volume settings) + #{increment})"
     end
 
-    def decrease(decrement=10)
+    def volume_decrease(decrement=10)
       increase(-decrement)
     end
 
